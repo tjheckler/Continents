@@ -1,14 +1,32 @@
-@(continent:Continent)
+@(continent : Continent)
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="/assets/lib/bootstrap/css/bootstrap.min.css">
     <title>@continent.getName()</title>
 </head>
 <body>
-<h1>@continent.getName()</h1>
-<p>Square Kilometers: @continent.getSquareKilometers</p>
-<p>Population: @continent.getPopulation</p>
-
+<div class="container">
+    <div class="row">
+        <div class="col-8">
+            <div class="row">
+                <div class="col-12 text-center">@continent.getName()</div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <p>Square Kilometers: @continent.getSquareKilometers</p>
+                </div>
+                <div class="col-6">
+                    <p>Population: @continent.getPopulation</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-4">
+            <img src="/assets/images/africa.png" width="200">
+        </div>
+    </div>
+</div>
 </body>
 </html>
