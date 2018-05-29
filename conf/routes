@@ -12,7 +12,7 @@ GET     /message                    controllers.AsyncController.message
 GET     /continents                 controllers.ContinentsController.getContinents
 GET     /continent/:id                  controllers.ContinentsController.getContinent(id:String)
 
-
+GET     /helloworld                 controllers.HomeController.getHelloWorld
 
 
 # Map static resources from the /public folder to the /assets URL path
