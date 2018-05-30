@@ -14,6 +14,6 @@ GET     /continent/:id                  controllers.ContinentsController.getCont
 
 GET     /helloworld                 controllers.HomeController.getHelloWorld
 
-
+GET     /employees                 controllers.EmployeeController.getEmployees
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
