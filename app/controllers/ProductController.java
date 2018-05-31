@@ -43,5 +43,15 @@ public class ProductController extends Controller
                 .createQuery(sql, Product.class).setParameter("searchCriteria",queryParameter).getResultList();
         return ok(views.html.products.render(products,searchCriteria));
     }
+    @Transactional(readOnly = true)
+    public Result getProduct(Integer productId)
+    {
 
+        String sql = "SELECT p FROM Product p " +
+                "WHERE productId = :productId";
+        Product product = jpaApi.em().createQuery(sql,Product.class).
+                setParameter("productId",productId).getSingleResult();
+
+        return ok(views.html.product.render(product));
+    }
 }

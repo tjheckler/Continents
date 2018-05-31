@@ -1,0 +1,43 @@
+@(product:Product)
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/assets/lib/bootstrap/css/bootstrap.min.css">
+    <title>Product Detail</title>
+</head>
+<body>
+<h1 align="center">@product.getProductName</h1>
+<h1></h1>
+<table class="table table-bordered" align="center">
+    <th>
+        Product Name
+    </th>
+    <th>
+        Unit Price
+    </th>
+    <th>
+        Units In Stock
+    </th>
+    <th>
+        Units On Order
+    </th>
+    <tr>
+        <td>
+            @product.getProductName
+        </td>
+        <td>
+            @product.getUnitPrice
+        </td>
+        <td>
+        @product.getUnitsInStock
+    </td>
+        <td>
+            @product.getUnitsOnOrder
+        </td>
+    </tr>
+
+</table>
+
+</body>
+</html>

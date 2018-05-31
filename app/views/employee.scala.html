@@ -1,0 +1,36 @@
+@(employee:Employee)
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Employee Detail</title>
+</head>
+<body>
+<h1>@employee.getFirstName @employee.getLastName</h1>
+<h1></h1>
+<table class="table">
+    <th>
+        First Name
+    </th>
+    <th>
+        Last Name
+    </th>
+    <th>
+        Notes
+    </th>
+    <tr>
+        <td>
+            @employee.getFirstName
+        </td>
+        <td>
+            @employee.getLastName
+        </td>
+        <td width="300">
+            @employee.getNotes
+        </td>
+    </tr>
+
+</table>
+
+</body>
+</html>

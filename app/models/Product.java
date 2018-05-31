@@ -11,6 +11,8 @@ public class Product
     private int productId;
     private String productName;
     private BigDecimal unitPrice;
+    private int unitsInStock;
+    private int unitsOnOrder;
 
     public String getProductName()
     {
@@ -20,5 +22,30 @@ public class Product
     public BigDecimal getUnitPrice()
     {
         return unitPrice;
+    }
+
+    public int getUnitsInStock()
+    {
+        return unitsInStock;
+    }
+
+    public void setUnitsInStock(int unitsInStock)
+    {
+        this.unitsInStock = unitsInStock;
+    }
+
+    public int getUnitsOnOrder()
+    {
+        return unitsOnOrder;
+    }
+
+    public void setUnitsOnOrder(int unitsOnOrder)
+    {
+        this.unitsOnOrder = unitsOnOrder;
+    }
+
+    public int getProductId()
+    {
+        return productId;
     }
 }

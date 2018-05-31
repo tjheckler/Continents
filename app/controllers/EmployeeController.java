@@ -26,7 +26,7 @@ public class EmployeeController extends Controller
     @Transactional(readOnly = true)
     public Result getEmployees()
     {
-        DynamicForm form =formFactory.form().bindFromRequest();
+        DynamicForm form = formFactory.form().bindFromRequest();
         String sql = "SELECT e FROM Employee e " +
                 " WHERE lastName LIKE :searchCriteria " +
                 "or firstName LIKE :searchCriteria " +
@@ -39,10 +39,21 @@ public class EmployeeController extends Controller
         String queryParameter = searchCriteria + "%";
 
         List<Employee> employees = jpaApi.em()
-                .createQuery(sql, Employee.class).setParameter("searchCriteria",queryParameter).getResultList();
+                .createQuery(sql, Employee.class).setParameter("searchCriteria", queryParameter).getResultList();
 
 
-        return ok(views.html.employees.render(employees,searchCriteria));
+        return ok(views.html.employees.render(employees, searchCriteria));
+    }
+    @Transactional(readOnly = true)
+    public Result getEmployee(Integer employeeId)
+    {
+
+        String sql = "SELECT e FROM Employee e " +
+                "WHERE employeeId = :employeeId";
+        Employee employee = jpaApi.em().createQuery(sql,Employee.class).
+                setParameter("employeeId",employeeId).getSingleResult();
+
+        return ok(views.html.employee.render(employee));
     }
 
 }
