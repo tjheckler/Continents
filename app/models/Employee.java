@@ -33,4 +33,9 @@ public class Employee
     {
         return notes;
     }
+
+    public int getEmployeeId()
+    {
+        return employeeId;
+    }
 }

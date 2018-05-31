@@ -3,15 +3,20 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="/assets/lib/bootstrap/css/bootstrap.min.css">
     <title>Employees</title>
 </head>
 <body>
-
+<br>
+<div class="container" align="center">
 <form method="get">
-    <input type="text" name="searchCriteria" value="@searchCriteria">
-    <input type="submit" value="Search">
+    <input class="rounded" type="text" name="searchCriteria" value="@searchCriteria">
+    <input class="btn btn-primary" type="submit" value="Search">
 </form>
-<table>
+    <br>
+</div>
+<div class="container">
+<table class="table table-bordered">
 <th>
     First Name
 </th>
@@ -24,10 +29,10 @@
     @for(employee <- employees)  {
     <tr>
         <td>
-        @employee.getFirstName
+        <a href="employee/@employee.getEmployeeId">@employee.getFirstName</a>
         </td>
         <td>
-            @employee.getLastName
+            <a href="employee/@employee.getEmployeeId"> @employee.getLastName</a>
         </td>
         <td>
             @employee.getCity
@@ -35,5 +40,6 @@
     </tr>
     }
 </table>
+</div>
 </body>
 </html>
