@@ -29,7 +29,9 @@ public class ProductController extends Controller
     public Result getProducts()
     {
         DynamicForm form =formFactory.form().bindFromRequest();
-        String sql = "SELECT p FROM Product p WHERE productName LIKE :searchCriteria";
+        String sql = "SELECT p FROM Product p " +
+                "WHERE productName LIKE :searchCriteria " +
+                "ORDER BY productName ";
         String searchCriteria = form.get("searchCriteria");
         if (searchCriteria == null)
         {

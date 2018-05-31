@@ -27,7 +27,10 @@ public class EmployeeController extends Controller
     public Result getEmployees()
     {
         DynamicForm form =formFactory.form().bindFromRequest();
-        String sql = "SELECT e FROM Employee e WHERE lastName LIKE :searchCriteria or firstName LIKE :searchCriteria";
+        String sql = "SELECT e FROM Employee e " +
+                " WHERE lastName LIKE :searchCriteria " +
+                "or firstName LIKE :searchCriteria " +
+                "ORDER BY lastName";
         String searchCriteria = form.get("searchCriteria");
         if (searchCriteria == null)
         {
