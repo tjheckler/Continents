@@ -11,6 +11,7 @@ public class Employee
 
     private String firstName;
     private String lastName;
+    private String city;
 
     public String getFirstName()
     {
@@ -20,5 +21,10 @@ public class Employee
     public String getLastName()
     {
         return lastName;
+    }
+
+    public String getCity()
+    {
+        return city;
     }
 }

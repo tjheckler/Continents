@@ -1,9 +1,13 @@
 package models;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.math.BigDecimal;
 
+@Entity
 public class Product
 {
+    @Id
     private int productId;
     private String productName;
     private BigDecimal unitPrice;
