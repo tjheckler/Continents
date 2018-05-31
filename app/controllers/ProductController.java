@@ -35,11 +35,11 @@ public class ProductController extends Controller
         {
             searchCriteria = "";
         }
-        searchCriteria += "%";
+        String queryParameter = searchCriteria + "%";
 
         List<Product> products = jpaApi.em()
-                .createQuery(sql, Product.class).setParameter("searchCriteria",searchCriteria).getResultList();
-        return ok(views.html.products.render(products));
+                .createQuery(sql, Product.class).setParameter("searchCriteria",queryParameter).getResultList();
+        return ok(views.html.products.render(products,searchCriteria));
     }
 
 }

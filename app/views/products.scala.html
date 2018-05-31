@@ -1,4 +1,4 @@
-@(products: List[Product])
+@(products: List[Product],searchCriteria: String)
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +8,7 @@
 <body>
 
 <form method="get">
-    <input type="text" name="searchCriteria">
+    <input type="text" name="searchCriteria" value="@searchCriteria">
     <input type="submit" value="Search">
 </form>
 <table>

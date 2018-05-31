@@ -27,18 +27,19 @@ public class EmployeeController extends Controller
     public Result getEmployees()
     {
         DynamicForm form =formFactory.form().bindFromRequest();
-        String sql = "SELECT e FROM Employee e WHERE lastName LIKE :searchCriteria";
+        String sql = "SELECT e FROM Employee e WHERE lastName LIKE :searchCriteria or firstName LIKE :searchCriteria";
         String searchCriteria = form.get("searchCriteria");
         if (searchCriteria == null)
         {
             searchCriteria = "";
         }
-        searchCriteria += "%";
+        String queryParameter = searchCriteria + "%";
+
         List<Employee> employees = jpaApi.em()
-                .createQuery(sql, Employee.class).setParameter("searchCriteria",searchCriteria).getResultList();
+                .createQuery(sql, Employee.class).setParameter("searchCriteria",queryParameter).getResultList();
 
 
-        return ok(views.html.employees.render(employees));
+        return ok(views.html.employees.render(employees,searchCriteria));
     }
 
 }
