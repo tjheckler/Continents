@@ -13,6 +13,7 @@ public class Employee
     private String lastName;
     private String city;
     private String notes;
+private int titleOfCourtesyId;
 
     public String getFirstName()
     {
@@ -57,5 +58,15 @@ public class Employee
     public void setNotes(String notes)
     {
         this.notes = notes;
+    }
+
+    public int getTitleOfCourtesyId()
+    {
+        return titleOfCourtesyId;
+    }
+
+    public void setTitleOfCourtesyId(int titleOfCourtesy)
+    {
+        this.titleOfCourtesyId = titleOfCourtesy;
     }
 }

@@ -1,4 +1,4 @@
-@(employee:Employee)
+@(employee:Employee,titleOfCourtesies:List[TitleOfCourtesy])
 <!DOCTYPE html>
 @import helper._
 <html lang="en">
@@ -9,21 +9,41 @@
 </head>
 <body>
 
-<div class="container" >
+    <!-- formatted with breaks during changes -->
+
+<div class="container">
     <div>
+        <br>
         <form method="post" class="form-control">
             @CSRF.formField
+            Title Of Courtesy:
+            <select class="rounded" name="titleOfCourtesyId" id="titleOfCourtesyId">
+                @for(titleOfCourtesy<-titleOfCourtesies){
+                @if(titleOfCourtesy.getTitleOfCourtesyId==employee.getTitleOfCourtesyId){
+                <option selected="selected" value="@titleOfCourtesy.getTitleOfCourtesyId">
+                    @titleOfCourtesy.getTitleOfCourtesyName
+                </option>
+                }else{
+
+                <option value="@titleOfCourtesy.getTitleOfCourtesyId" >
+                    @titleOfCourtesy.getTitleOfCourtesyName
+                </option>
+                }
+                }
+            </select>
+            <br>
+            <br>
             First Name: <input class="rounded" type="text" name="firstName" id="firstName"
                                value="@employee.getFirstName" minlength="1"
                                maxlength="20" size="20">
             <br>
             <br>
             Last Name: <input class="rounded" type="text" name="lastName" id="lastName"
-                               value="@employee.getLastName" minlength="1"
-                               maxlength="20" size="20">
+                              value="@employee.getLastName" minlength="1"
+                              maxlength="20" size="20">
             <br>
             <br>
-            @employee.getNotes
+            <p> @employee.getNotes</p>
             <br>
             <br>
             <input class="btn btn-primary" type="submit" value="save">

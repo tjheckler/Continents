@@ -1,6 +1,7 @@
 package controllers;
 
 import models.Employee;
+import models.TitleOfCourtesy;
 import play.data.DynamicForm;
 import play.data.FormFactory;
 import play.db.jpa.JPAApi;
@@ -54,7 +55,11 @@ public class EmployeeController extends Controller
         Employee employee = jpaApi.em().createQuery(sql, Employee.class).
                 setParameter("employeeId", employeeId).getSingleResult();
 
-        return ok(views.html.employee.render(employee));
+        String titleSql = "SELECT t FROM TitleOfCourtesy t ";
+            List<TitleOfCourtesy> titleOfCourtesies = jpaApi.em()
+                    .createQuery(titleSql, TitleOfCourtesy.class).getResultList();
+
+        return ok(views.html.employee.render(employee,titleOfCourtesies));
     }
 
     @Transactional
@@ -69,9 +74,13 @@ public class EmployeeController extends Controller
 
         String firstName = form.get("firstName");
         employee.setFirstName(firstName);
+        int titleOfCourtesyId = Integer.parseInt(form.get("titleOfCourtesyId"));
         String lastName = form.get("lastName");
         employee.setLastName(lastName);
+        employee.setTitleOfCourtesyId(titleOfCourtesyId);
+
         jpaApi.em().persist(employee);
+
         return redirect(routes.EmployeeController.getEmployees());
     }
 
