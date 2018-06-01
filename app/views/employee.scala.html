@@ -10,18 +10,21 @@
 <body>
 
 
+<form method="post">
+    @CSRF.formField
+    First Name: <input type="text" name="firstName" id="firstName"
+                       value="@employee.getFirstName" minlength="1"
+                       maxlength="20" size="20">
+    <br>
+    <br>
+    @employee.getLastName
+    <br>
+    <br>
+    @employee.getNotes
+    <br>
+    <br>
+    <input type="submit" value="save">
 
-    <form method="post">
-        @CSRF.formField
-        First Name: <input type="text" name="firstName" id="firstName" value="@employee.getFirstName" minlength="1" maxlength="20" size="20">
-        <br>
-
-        @employee.getLastName
-<br>
-        @employee.getNotes
-        <br>
-        <input type="submit" value="save">
-
-    </form>
-    </body>
+</form>
+</body>
 </html>
