@@ -69,7 +69,8 @@ public class EmployeeController extends Controller
 
         String firstName = form.get("firstName");
         employee.setFirstName(firstName);
-
+        String lastName = form.get("lastName");
+        employee.setLastName(lastName);
         jpaApi.em().persist(employee);
         return redirect(routes.EmployeeController.getEmployees());
     }

@@ -54,4 +54,21 @@ public class ProductController extends Controller
 
         return ok(views.html.product.render(product));
     }
+    @Transactional
+    public Result postProduct(Integer productId)
+    {
+        String sql = "SELECT e FROM Product e " +
+                "WHERE productId = :productId";
+
+        Product product = jpaApi.em().createQuery(sql, Product.class)
+                .setParameter("productId", productId).getSingleResult();
+        DynamicForm form = formFactory.form().bindFromRequest();
+
+        String productName = form.get("productName");
+        product.setProductName(productName);
+       // String lastName = form.get("lastName");
+       // employee.setLastName(lastName);
+        jpaApi.em().persist(product);
+        return redirect(routes.ProductController.getProducts());
+    }
 }

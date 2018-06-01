@@ -9,22 +9,27 @@
 </head>
 <body>
 
+<div class="container" >
+    <div>
+        <form method="post" class="form-control">
+            @CSRF.formField
+            First Name: <input class="rounded" type="text" name="firstName" id="firstName"
+                               value="@employee.getFirstName" minlength="1"
+                               maxlength="20" size="20">
+            <br>
+            <br>
+            Last Name: <input class="rounded" type="text" name="lastName" id="lastName"
+                               value="@employee.getLastName" minlength="1"
+                               maxlength="20" size="20">
+            <br>
+            <br>
+            @employee.getNotes
+            <br>
+            <br>
+            <input class="btn btn-primary" type="submit" value="save">
 
-<form method="post">
-    @CSRF.formField
-    First Name: <input type="text" name="firstName" id="firstName"
-                       value="@employee.getFirstName" minlength="1"
-                       maxlength="20" size="20">
-    <br>
-    <br>
-    @employee.getLastName
-    <br>
-    <br>
-    @employee.getNotes
-    <br>
-    <br>
-    <input type="submit" value="save">
-
-</form>
+        </form>
+    </div>
+</div>
 </body>
 </html>

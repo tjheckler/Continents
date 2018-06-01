@@ -48,4 +48,14 @@ public class Product
     {
         return productId;
     }
+
+    public void setProductName(String productName)
+    {
+        this.productName = productName;
+    }
+
+    public void setUnitPrice(BigDecimal unitPrice)
+    {
+        this.unitPrice = unitPrice;
+    }
 }
