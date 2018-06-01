@@ -16,6 +16,7 @@ GET     /helloworld                 controllers.HomeController.getHelloWorld
 
 GET     /employees                 controllers.EmployeeController.getEmployees
 GET     /employee/:id                 controllers.EmployeeController.getEmployee(id:Integer)
+POST     /employee/:id                 controllers.EmployeeController.postEmployee(id:Integer)
 
 GET     /products                 controllers.ProductController.getProducts
 GET     /product/:id                 controllers.ProductController.getProduct(id:Integer)

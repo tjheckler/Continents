@@ -38,4 +38,24 @@ public class Employee
     {
         return employeeId;
     }
+
+    public void setFirstName(String firstName)
+    {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName)
+    {
+        this.lastName = lastName;
+    }
+
+    public void setCity(String city)
+    {
+        this.city = city;
+    }
+
+    public void setNotes(String notes)
+    {
+        this.notes = notes;
+    }
 }

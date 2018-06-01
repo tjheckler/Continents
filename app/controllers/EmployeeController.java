@@ -44,16 +44,34 @@ public class EmployeeController extends Controller
 
         return ok(views.html.employees.render(employees, searchCriteria));
     }
+
     @Transactional(readOnly = true)
     public Result getEmployee(Integer employeeId)
     {
 
         String sql = "SELECT e FROM Employee e " +
                 "WHERE employeeId = :employeeId";
-        Employee employee = jpaApi.em().createQuery(sql,Employee.class).
-                setParameter("employeeId",employeeId).getSingleResult();
+        Employee employee = jpaApi.em().createQuery(sql, Employee.class).
+                setParameter("employeeId", employeeId).getSingleResult();
 
         return ok(views.html.employee.render(employee));
+    }
+
+    @Transactional
+    public Result postEmployee(Integer employeeId)
+    {
+        String sql = "SELECT e FROM Employee e " +
+                "WHERE employeeId = :employeeId";
+
+        Employee employee = jpaApi.em().createQuery(sql, Employee.class)
+                .setParameter("employeeId", employeeId).getSingleResult();
+        DynamicForm form = formFactory.form().bindFromRequest();
+
+        String firstName = form.get("firstName");
+        employee.setFirstName(firstName);
+
+        jpaApi.em().persist(employee);
+        return redirect(routes.EmployeeController.getEmployees());
     }
 
 }
