@@ -1,7 +1,9 @@
 package controllers;
 
+import models.Category;
 import models.Employee;
 import models.Product;
+import models.TitleOfCourtesy;
 import play.data.DynamicForm;
 import play.data.FormFactory;
 import play.db.jpa.JPAApi;
@@ -52,7 +54,11 @@ public class ProductController extends Controller
         Product product = jpaApi.em().createQuery(sql,Product.class).
                 setParameter("productId",productId).getSingleResult();
 
-        return ok(views.html.product.render(product));
+        String categorySql = "SELECT c FROM Category c";
+        List<Category> categories = jpaApi.em()
+                .createQuery(categorySql, Category.class).getResultList();
+
+        return ok(views.html.product.render(product,categories));
     }
     @Transactional
     public Result postProduct(Integer productId)
@@ -65,7 +71,9 @@ public class ProductController extends Controller
         DynamicForm form = formFactory.form().bindFromRequest();
 
         String productName = form.get("productName");
+        int categoryId = Integer.parseInt(form.get("categoryId"));
         product.setProductName(productName);
+        product.setCategoryId(categoryId);
        // String lastName = form.get("lastName");
        // employee.setLastName(lastName);
         jpaApi.em().persist(product);

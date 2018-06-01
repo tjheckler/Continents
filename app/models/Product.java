@@ -13,6 +13,7 @@ public class Product
     private BigDecimal unitPrice;
     private int unitsInStock;
     private int unitsOnOrder;
+    private int categoryId;
 
     public String getProductName()
     {
@@ -57,5 +58,15 @@ public class Product
     public void setUnitPrice(BigDecimal unitPrice)
     {
         this.unitPrice = unitPrice;
+    }
+
+    public int getCategoryId()
+    {
+        return categoryId;
+    }
+
+    public void setCategoryId(int categoryId)
+    {
+        this.categoryId = categoryId;
     }
 }

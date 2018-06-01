@@ -1,4 +1,4 @@
-@(product:Product)
+@(product:Product, categories:List[Category])
 <!DOCTYPE html>
 @import helper._
 <html lang="en">
@@ -7,27 +7,47 @@
     <link rel="stylesheet" href="/assets/lib/bootstrap/css/bootstrap.min.css">
     <title>Product Detail</title>
 </head>
+
+<!-- formatted with breaks during changes -->
 <body>
 <h1 align="center">@product.getProductName</h1>
 <h1></h1>
 <div class="container">
     <div>
-    <form method="post" class="form-control">
-        @CSRF.formField
-        Product Name: <input class="rounded" type="text" name="productName" id="productName"
-                             value="@product.getProductName" minlength="1"
-                             maxlength="20" size="20">
+        <br>
+        <form method="post" class="form-control">
+            @CSRF.formField
+            Category Name:
+            <select class="rounded" name="categoryId" id="categoryId">
+                @for(category<-categories){
+                @if(category.getCategoryId==product.getCategoryId){
+                <option selected="selected" value="@category.getCategoryId">
+                    @category.getCategoryName
+                </option>
+                }else{
 
-        <br>
-        Unit Price: @product.getUnitPrice
-        <br>
-       Units In Stock: @product.getUnitsInStock
-        <br>
-      Units On Order:  @product.getUnitsOnOrder
-        <br>
+                <option value="@category.getCategoryId">
+                    @category.getCategoryName
+                </option>
+                }
+                }
+            </select>
+            <br>
+            <br>
+            Product Name: <input class="rounded" type="text" name="productName" id="productName"
+                                 value="@product.getProductName" minlength="1"
+                                 maxlength="20" size="20">
 
-        <input class="btn btn-primary" type="submit" value="save">
-    </form>
+            <br>
+            Unit Price: @product.getUnitPrice
+            <br>
+            Units In Stock: @product.getUnitsInStock
+            <br>
+            Units On Order: @product.getUnitsOnOrder
+            <br>
+            <br>
+            <input class="btn btn-primary" type="submit" value="save">
+        </form>
     </div>
 </div>
 </body>
