@@ -56,10 +56,10 @@ public class EmployeeController extends Controller
                 setParameter("employeeId", employeeId).getSingleResult();
 
         String titleSql = "SELECT t FROM TitleOfCourtesy t ";
-            List<TitleOfCourtesy> titleOfCourtesies = jpaApi.em()
-                    .createQuery(titleSql, TitleOfCourtesy.class).getResultList();
+        List<TitleOfCourtesy> titleOfCourtesies = jpaApi.em()
+                .createQuery(titleSql, TitleOfCourtesy.class).getResultList();
 
-        return ok(views.html.employee.render(employee,titleOfCourtesies));
+        return ok(views.html.employee.render(employee, titleOfCourtesies));
     }
 
     @Transactional
@@ -84,4 +84,21 @@ public class EmployeeController extends Controller
         return redirect(routes.EmployeeController.getEmployees());
     }
 
+    public Result getNewTitleOfCourtesy()
+    {
+        return ok(views.html.newtitleofcourtesy.render());
+    }
+
+    @Transactional
+    public Result postNewTitleOfCourtesy()
+    {
+        DynamicForm form = formFactory.form().bindFromRequest();
+        String title = form.get("title");
+
+        TitleOfCourtesy titleOfCourtesy = new TitleOfCourtesy();
+        titleOfCourtesy.setTitleOfCourtesyName(title);
+        jpaApi.em().persist(titleOfCourtesy);
+
+        return ok("New ID is " + titleOfCourtesy.getTitleOfCourtesyId());
+    }
 }

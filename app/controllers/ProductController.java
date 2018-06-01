@@ -79,4 +79,22 @@ public class ProductController extends Controller
         jpaApi.em().persist(product);
         return redirect(routes.ProductController.getProducts());
     }
+    public Result getNewCategory()
+    {
+        return ok(views.html.newcategory.render());
+    }
+
+    @Transactional
+    public Result postNewCategory()
+    {
+        DynamicForm form = formFactory.form().bindFromRequest();
+        String category1 = form.get("category");
+        String category2 = form.get("description");
+        Category category = new Category();
+        category.setCategoryName(category1);
+        category.setDescription(category2);
+        jpaApi.em().persist(category);
+
+        return ok("New ID is " + category.getCategoryId()+ " " + category.getDescription());
+    }
 }

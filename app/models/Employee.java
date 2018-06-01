@@ -69,4 +69,5 @@ private int titleOfCourtesyId;
     {
         this.titleOfCourtesyId = titleOfCourtesy;
     }
+
 }
