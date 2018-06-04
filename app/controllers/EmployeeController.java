@@ -1,6 +1,7 @@
 package controllers;
 
 import models.Employee;
+import models.EmployeeDetail;
 import models.TitleOfCourtesy;
 import play.data.DynamicForm;
 import play.data.FormFactory;
@@ -28,7 +29,9 @@ public class EmployeeController extends Controller
     public Result getEmployees()
     {
         DynamicForm form = formFactory.form().bindFromRequest();
-        String sql = "SELECT e FROM Employee e " +
+        String sql = "SELECT NEW models.EmployeeDetail(e.employeeId, e.firstName, e.lastName, e.city, t.titleOfCourtesyName) " +
+                "FROM Employee e " +
+                "JOIN TitleOfCourtesy t ON e.titleOfCourtesyId = t.titleOfCourtesyId " +
                 " WHERE lastName LIKE :searchCriteria " +
                 "or firstName LIKE :searchCriteria " +
                 "ORDER BY lastName";
@@ -39,8 +42,8 @@ public class EmployeeController extends Controller
         }
         String queryParameter = searchCriteria + "%";
 
-        List<Employee> employees = jpaApi.em()
-                .createQuery(sql, Employee.class).setParameter("searchCriteria", queryParameter).getResultList();
+        List<EmployeeDetail> employees = jpaApi.em()
+                .createQuery(sql, EmployeeDetail.class).setParameter("searchCriteria", queryParameter).getResultList();
 
 
         return ok(views.html.employees.render(employees, searchCriteria));

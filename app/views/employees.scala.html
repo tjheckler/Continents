@@ -1,4 +1,4 @@
-@(employees: List[Employee],searchCriteria: String)
+@(employees: List[EmployeeDetail],searchCriteria: String)
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,7 +18,10 @@
     <br>
 </div>
 <div class="container">
-<table class="table table-bordered">
+<table class="table table-bordered" align="center">
+    <th>
+        Title of Courtesy
+    </th>
 <th>
     First Name
 </th>
@@ -30,6 +33,9 @@
     </th>
     @for(employee <- employees)  {
     <tr>
+        <td>
+            @employee.getTitleOfCourtesyName
+        </td>
         <td>
         <a href="employee/@employee.getEmployeeId">@employee.getFirstName</a>
         </td>
