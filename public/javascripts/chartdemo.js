@@ -32,7 +32,7 @@
 				]
 			},
 			options: {
-				responsive: true
+				responsive: false
 			}
 		};
 

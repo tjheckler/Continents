@@ -2,18 +2,25 @@ package models;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.math.BigDecimal;
 
 @Entity
 public class Employee
 {
     @Id
-   private int employeeId;
+    private int employeeId;
 
     private String firstName;
     private String lastName;
     private String city;
     private String notes;
-private int titleOfCourtesyId;
+    private BigDecimal salary;
+    private int titleOfCourtesyId;
+
+    public BigDecimal getSalary()
+    {
+        return salary;
+    }
 
     public String getFirstName()
     {

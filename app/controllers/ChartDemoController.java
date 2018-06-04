@@ -10,4 +10,8 @@ public class ChartDemoController extends Controller
     {
         return ok(views.html.chartdemo.render());
     }
+    public Result getBarChart()
+    {
+        return ok(views.html.barchart.render());
+    }
 }

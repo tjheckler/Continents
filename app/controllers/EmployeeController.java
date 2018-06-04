@@ -104,4 +104,11 @@ public class EmployeeController extends Controller
 
         return ok("New ID is " + titleOfCourtesy.getTitleOfCourtesyId());
     }
+    @Transactional(readOnly = true)
+    public Result getSalaries()
+    {
+        String sql = "SELECT e FROM Employee e ORDER BY lastName, firstName ";
+        List<Employee> employees = jpaApi.em().createQuery(sql, Employee.class).getResultList();
+        return ok(views.html.salaries.render(employees));
+    }
 }
