@@ -16,16 +16,24 @@
 <br>
 <div class="container">
 <table class="table table-bordered" align="center" width="800">
+
     <th>
         Product Name
     </th>
     <th>
+        Category
+    </th>
+    <th>
         Unit Price
     </th>
+
     @for(product <- products)  {
     <tr>
         <td>
             <a href="product/@product.getProductId()"> <b> @product.getProductName </b></a>
+        </td>
+        <td>
+            @product.getCategoryName
         </td>
         <td>
             @product.getUnitPrice

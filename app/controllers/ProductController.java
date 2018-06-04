@@ -31,7 +31,9 @@ public class ProductController extends Controller
     public Result getProducts()
     {
         DynamicForm form =formFactory.form().bindFromRequest();
-        String sql = "SELECT p FROM Product p " +
+        String sql = "SELECT NEW models.ProductDetail(p.productId, p.productName, p.unitPrice, c.categoryName) " +
+                "FROM Product p " +
+                "JOIN Category c ON p.categoryId = c.categoryId "+
                 "WHERE productName LIKE :searchCriteria " +
                 "ORDER BY productName ";
         String searchCriteria = form.get("searchCriteria");
