@@ -10,19 +10,21 @@
     <title>Salaries</title>
 </head>
 <body>
+<br>
 @for(i <- 0 to employees.size() - 1){ @employees.get(i).getLastName @if(i < employees.size() - 1){,} }
 <br>
-@for(employee <- employees){ @employee.getSalary, }
+@for(i <- 0 to employees.size() - 1){ @employees.get(i).getSalary @if(i < employees.size() - 1){,} }
 <br>
-<div class="container" style="width:40%">
+<div class="container" >
     <div class="row">
-        <div class="col-md-12">
+        <div>
             <canvas id="salaries" width="600" height="400"></canvas>
         </div>
     </div>
 </div>
 <script type="text/javascript" id="barchart" src="assets/javascripts/salariesChart.js"
-        data-labels = "@for(i <- 0 to employees.size() - 1){ @employees.get(i).getLastName @if(i < employees.size() - 1){,} }" data-data="@for(employee <- employees){ @employee.getSalary, }">
+        data-labels = "@for(i <- 0 to employees.size() - 1){ @employees.get(i).getLastName @if(i < employees.size() - 1){,} }"
+        data-data="@for(i <- 0 to employees.size() - 1){ @employees.get(i).getSalary @if(i < employees.size() - 1){,} }">
 </script>
 </body>
 </html>
