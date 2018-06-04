@@ -1,9 +1,6 @@
 package controllers;
 
-import models.Category;
-import models.Employee;
-import models.Product;
-import models.TitleOfCourtesy;
+import models.*;
 import play.data.DynamicForm;
 import play.data.FormFactory;
 import play.db.jpa.JPAApi;
@@ -43,8 +40,8 @@ public class ProductController extends Controller
         }
         String queryParameter = searchCriteria + "%";
 
-        List<Product> products = jpaApi.em()
-                .createQuery(sql, Product.class).setParameter("searchCriteria",queryParameter).getResultList();
+        List<ProductDetail> products = jpaApi.em()
+                .createQuery(sql, ProductDetail.class).setParameter("searchCriteria",queryParameter).getResultList();
         return ok(views.html.products.render(products,searchCriteria));
     }
     @Transactional(readOnly = true)
