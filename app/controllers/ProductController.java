@@ -32,6 +32,7 @@ public class ProductController extends Controller
                 "FROM Product p " +
                 "JOIN Category c ON p.categoryId = c.categoryId "+
                 "WHERE productName LIKE :searchCriteria " +
+               "or categoryName LIKE :searchCriteria "    +
                 "ORDER BY productName ";
         String searchCriteria = form.get("searchCriteria");
         if (searchCriteria == null)
