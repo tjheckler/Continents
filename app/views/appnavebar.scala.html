@@ -1,0 +1,29 @@
+@(page : String)
+<nav class="navbar navbar-expand-sm bg-light navbar-light">
+    <ul class="navbar-nav">
+
+        <li class="nav-item active">
+            @if("continents".equals(page)){
+        <li class="nav-item active">
+            }else{
+        <li class="nav-item">
+            }
+            <a class="nav-link" href="continents">Continents</a>
+        </li>
+        <li class="nav-item">
+            @if("employees".equals(page)){
+        <li class="nav-item active">
+            }else{
+        <li class="nav-item">
+            }
+            <a class="nav-link" href="employees">Employees</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="freaks">Link</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link " href="wierdos">Disabled</a>
+        </li>
+    </ul>
+</nav>
+
