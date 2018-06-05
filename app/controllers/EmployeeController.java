@@ -86,6 +86,17 @@ public class EmployeeController extends Controller
 
         return redirect(routes.EmployeeController.getEmployees());
     }
+    @Transactional
+    public Result deleteEmployee(int employeeId)
+    {
+        String sql = "SELECT e FROM Employee e "+
+                "WHERE employeeId = :EmployeeId";
+        Employee employee = jpaApi.em().createQuery(sql, Employee.class).
+                setParameter("employeeId", employeeId).getSingleResult();
+        jpaApi.em().remove(employee);
+        return ok();
+    }
+
 
     public Result getNewTitleOfCourtesy()
     {

@@ -49,6 +49,10 @@
             <input class="btn btn-primary" type="submit" value="save">
 
         </form>
+        <form action="/deleteemployee/@employee.getEmployeeId" method="POST">
+            @CSRF.formField
+            <input type="submit" value="Delete">
+        </form>
     </div>
 </div>
 </body>
