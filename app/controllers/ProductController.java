@@ -97,4 +97,30 @@ public class ProductController extends Controller
 
         return ok("New ID is " + category.getCategoryId()+ " " + category.getDescription());
     }
+    @Transactional(readOnly = true)
+    public Result getProductsByCategory()
+    {
+        String sql = "SELECT  NEW ProductCategoryCount(c.categoryId, c.categoryName, COUNT(*)) " +
+                     "FROM Product p " +
+                     "JOIN Category c ON p.categoryId = c.categoryId " +
+                     "GROUP BY c.categoryName " +
+                     "ORDER BY c.categoryName";
+
+        List<ProductCategoryCount> productCategoryCounts = jpaApi.em().createQuery(sql, ProductCategoryCount.class).getResultList();
+
+        return ok(views.html.prodcatcount.render(productCategoryCounts));
+    }
+    @Transactional(readOnly = true)
+    public Result getUnitsInStockByCategory()
+    {
+        String sql = "SELECT  NEW UnitsByCategory(c.categoryId, c.categoryName, p.unitsInStock) " +
+                "FROM Product p " +
+                "JOIN Category c ON p.categoryId = c.categoryId " +
+                "GROUP BY c.categoryName " +
+                "ORDER BY c.categoryName";
+
+        List<UnitsByCategory> unitsByCategories = jpaApi.em().createQuery(sql,UnitsByCategory.class).getResultList();
+
+        return ok(views.html.unitsbycategory.render(unitsByCategories));
+    }
 }

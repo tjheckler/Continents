@@ -1,0 +1,30 @@
+@(productCategoryCounts:List[ProductCategoryCount])
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="/assets/lib/bootstrap/css/bootstrap.min.css">
+    <script src="/assets/lib/chart.js/Chart.bundle.min.js"></script>
+    <script src="/assets/lib/chart.js/utils.js"></script>
+    <title>Product Category Count</title>
+</head>
+<body>
+<br>
+@for(i <- 0 to productCategoryCounts.size() - 1){ @productCategoryCounts.get(i).getCategoryName @if(i < productCategoryCounts.size() - 1){,} }
+<br>
+@for(i <- 0 to productCategoryCounts.size() - 1){ @productCategoryCounts.get(i).getCount @if(i < productCategoryCounts.size() - 1){,} }
+<br>
+<div class="container" >
+    <div class="row">
+        <div>
+            <canvas id="prodcatcount" width="600" height="400"></canvas>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" id="barchart" src="assets/javascripts/productcatcount.js"
+        data-labels = "@for(i <- 0 to productCategoryCounts.size() - 1){ @productCategoryCounts.get(i).getCategoryName @if(i < productCategoryCounts.size() - 1){,} }"
+        data-data="@for(i <- 0 to productCategoryCounts.size() - 1){ @productCategoryCounts.get(i).getCount @if(i < productCategoryCounts.size() - 1){,} }">
+</script>
+</body>
+</html>

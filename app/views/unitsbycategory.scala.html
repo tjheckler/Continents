@@ -1,0 +1,30 @@
+@(unitsByCategories:List[UnitsByCategory])
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="/assets/lib/bootstrap/css/bootstrap.min.css">
+    <script src="/assets/lib/chart.js/Chart.bundle.min.js"></script>
+    <script src="/assets/lib/chart.js/utils.js"></script>
+    <title>Units In Stock By Category</title>
+</head>
+<body>
+<br>
+@for(i <- 0 to unitsByCategories.size() - 1){ @unitsByCategories.get(i).getCategoryName @if(i < unitsByCategories.size() - 1){,} }
+<br>
+@for(i <- 0 to unitsByCategories.size() - 1){ @unitsByCategories.get(i).getUnitsInStock @if(i < unitsByCategories.size() - 1){,} }
+<br>
+<div class="container" >
+    <div class="row">
+        <div>
+            <canvas id="unitsinstock" width="600" height="400"></canvas>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" id="barchart" src="assets/javascripts/unitsinstock.js"
+        data-labels = "@for(i <- 0 to unitsByCategories.size() - 1){ @unitsByCategories.get(i).getCategoryName @if(i < unitsByCategories.size() - 1){,} }"
+        data-data="@for(i <- 0 to unitsByCategories.size() - 1){ @unitsByCategories.get(i).getUnitsInStock @if(i < unitsByCategories.size() - 1){,} }">
+</script>
+</body>
+</html>
