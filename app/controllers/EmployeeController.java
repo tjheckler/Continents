@@ -1,5 +1,6 @@
 package controllers;
 
+import com.google.common.io.Files;
 import models.Employee;
 import models.EmployeeDetail;
 import models.TitleOfCourtesy;
@@ -8,9 +9,12 @@ import play.data.FormFactory;
 import play.db.jpa.JPAApi;
 import play.db.jpa.Transactional;
 import play.mvc.Controller;
+import play.mvc.Http;
 import play.mvc.Result;
 
 import javax.inject.Inject;
+
+import java.io.File;
 import java.util.List;
 
 public class EmployeeController extends Controller
@@ -68,6 +72,11 @@ public class EmployeeController extends Controller
     @Transactional
     public Result postEmployee(Integer employeeId)
     {
+
+        Http.MultipartFormData<File> formData = request().body().asMultipartFormData();
+        Http.MultipartFormData.FilePart<File> filePart = formData.getFile("employeephoto");
+        File file = filePart.getFile();
+
         String sql = "SELECT e FROM Employee e " +
                 "WHERE employeeId = :employeeId";
 
@@ -82,14 +91,27 @@ public class EmployeeController extends Controller
         employee.setLastName(lastName);
         employee.setTitleOfCourtesyId(titleOfCourtesyId);
 
+        if(file !=null)
+        {
+            try
+            {
+                employee.setPicture(Files.toByteArray(file));
+            }
+            catch (Exception e)
+            {
+                //do nothing
+            }
+        }
+
         jpaApi.em().persist(employee);
 
         return redirect(routes.EmployeeController.getEmployees());
     }
+
     @Transactional
     public Result deleteEmployee(int employeeId)
     {
-        String sql = "SELECT e FROM Employee e "+
+        String sql = "SELECT e FROM Employee e " +
                 "WHERE employeeId = :EmployeeId";
         Employee employee = jpaApi.em().createQuery(sql, Employee.class).
                 setParameter("employeeId", employeeId).getSingleResult();
@@ -115,6 +137,7 @@ public class EmployeeController extends Controller
 
         return ok("New ID is " + titleOfCourtesy.getTitleOfCourtesyId());
     }
+
     @Transactional(readOnly = true)
     public Result getSalaries()
     {
@@ -122,4 +145,16 @@ public class EmployeeController extends Controller
         List<Employee> employees = jpaApi.em().createQuery(sql, Employee.class).getResultList();
         return ok(views.html.salaries.render(employees));
     }
+
+    @Transactional(readOnly = true)
+    public Result getEmployeePicture(int employeeId)
+    {
+        String sql = "SELECT e FROM Employee e " +
+                "WHERE employeeId = :employeeId";
+        Employee employee = jpaApi.em().createQuery(sql, Employee.class).
+                setParameter("employeeId", employeeId).getSingleResult();
+        return ok(employee.getPicture()).as("image/jpg");
+    }
+
+
 }

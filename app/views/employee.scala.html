@@ -14,7 +14,7 @@
 <div class="container">
     <div>
         <br>
-        <form method="post" class="form-control">
+        <form method="post" class="form-control" enctype="multipart/form-data">
             @CSRF.formField
             Title Of Courtesy:
             <select class="rounded" name="titleOfCourtesyId" id="titleOfCourtesyId">
@@ -45,6 +45,7 @@
             <br>
             <p> @employee.getNotes</p>
             <br>
+            <input type="file" id="employeephoto" name="employeephoto">
             <br>
             <input class="btn btn-primary" type="submit" value="save">
 

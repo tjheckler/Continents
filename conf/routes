@@ -19,6 +19,7 @@ GET     /employee/:id                 controllers.EmployeeController.getEmployee
 POST     /employee/:id                 controllers.EmployeeController.postEmployee(id:Integer)
 POST     /deleteemployee/:id                 controllers.EmployeeController.deleteEmployee(id:Integer)
 GET     /salaries                      controllers.EmployeeController.getSalaries
+GET     /employeepicture/:id            controllers.EmployeeController.getEmployeePicture(id:Integer)
 
 GET     /products                 controllers.ProductController.getProducts
 GET     /product/:id                 controllers.ProductController.getProduct(id:Integer)

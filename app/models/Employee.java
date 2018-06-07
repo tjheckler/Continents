@@ -10,6 +10,7 @@ public class Employee
     @Id
     private int employeeId;
 
+    private byte[] picture;
     private String firstName;
     private String lastName;
     private String city;
@@ -77,4 +78,13 @@ public class Employee
         this.titleOfCourtesyId = titleOfCourtesy;
     }
 
+    public byte[] getPicture()
+    {
+        return picture;
+    }
+
+    public void setPicture(byte[] picture)
+    {
+        this.picture = picture;
+    }
 }
